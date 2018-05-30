@@ -1,13 +1,21 @@
 class List extends React.Component {
     constructor(props) {
         super(props);
+        this.deleteTask = this.deleteTask.bind(this)
         this.state = {
         };
     }
+
+    deleteTask(event){
+        event.target.parentElement.remove()
+    }
+
     render() {
         return(
             <ul> 
-                {(this.props.arrTask).map((taskName, i) => <li key={i}>{taskName}</li>)}
+                {(this.props.arrTask).map((taskName, i) => <li key={i}>{taskName}
+                    <button onClick={this.deleteTask}>X</button>
+                </li>)}
             </ul>
         );
     }
@@ -30,7 +38,9 @@ class App extends React.Component {
             })
             this.state.arrTask.push(event.target.value)
             console.log(this.state.arrTask)
+            event.target.value=''
         }   
+        
     } 
 
     render() {
