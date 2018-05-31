@@ -3,6 +3,7 @@ class List extends React.Component {
         super(props);
         this.deleteTask = this.deleteTask.bind(this)
         this.doneTask = this.doneTask.bind(this)
+        this.undoneTask = this.undoneTask.bind(this)
         this.state={
             arrDone:this.props.arrDone,
             arrTask:this.props.arrTask,
@@ -25,6 +26,17 @@ class List extends React.Component {
         })
     }
 
+     undoneTask(event){
+        event.target.parentElement.remove()  //mettre du Fade Out
+        var tempString = event.target.parentElement.textContent
+        var doneText = tempString.slice(0, -3) 
+        this.state.arrTask.push(doneText);
+        this.setState({
+            doneText: this.state.doneText,
+            arrTask : this.state.arrTask
+        })
+    }     
+
     render() {
         return(
         <div>
@@ -36,6 +48,7 @@ class List extends React.Component {
             <br/>
             <ul>
                 {(this.state.arrDone).map((taskName, i) => <li key={i}>{taskName}
+                <button onClick={this.deleteTask}>X</button> <button onClick={this.undoneTask}>D</button>
                 </li>)}
             </ul>
         </div>
