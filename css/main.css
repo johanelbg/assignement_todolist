@@ -33,6 +33,11 @@ input[type=text]{
     border-bottom: 1px solid white;
 }
 
+::placeholder { 
+    color: #66bb6a;
+    opacity: 0.7; 
+}
+
 label {
     color: white;
 }

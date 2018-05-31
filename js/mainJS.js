@@ -80,7 +80,7 @@ class App extends React.Component {
             console.log(this.state.arrTask)
             event.target.value=''
             }else{
-                event.target.placeholder='the frog is hungry, feed him with some words !!'
+                event.target.placeholder='Feed the frog with some words mate'
             }
         }   
         
