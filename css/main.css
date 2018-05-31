@@ -1,5 +1,25 @@
 html{
     background-color:#7986cb; 
+    font-family: Chalkduster, fantasy;
+}
+
+.subTitle{
+    font-size: 28px;
+    
+}
+.frogLetters{
+    color:#66bb6a;
+}
+
+.frogIcon{
+    position:fixed;
+    top:4%;
+    left:3%;
+    height:20vh;
+    width:20vh;
+    background-image:url('/Images/frog0.png');
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .input-field{
@@ -45,7 +65,9 @@ i{
 
 .toDoText, .doneText{
     margin-left:5%;
+    font-family: Bradley Hand, cursive;
 }
+
 
 a{
     margin-right:2%;

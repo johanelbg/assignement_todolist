@@ -80,7 +80,7 @@ class App extends React.Component {
             console.log(this.state.arrTask)
             event.target.value=''
             }else{
-                event.target.placeholder='Your task is to do nothing ? :)'
+                event.target.placeholder='the frog is hungry, feed him with some words !!'
             }
         }   
         
@@ -89,7 +89,9 @@ class App extends React.Component {
     render() {
         return(
             <div className='container flow-text'>
-            <h1>To Do List</h1>
+            <h1 className="title"> <span className="frogLetters">FROG</span>OTTEN</h1>
+            <h1 className="title subTitle">Never froget it !</h1>
+            <div className='frogIcon'></div>
                 <div className='input-field col s8'>
                    <input id='input_text' type='text' onKeyPress={this.enterTask}/>
                    <label for="input_text">Input task</label>
