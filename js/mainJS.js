@@ -18,7 +18,7 @@ class List extends React.Component {
     doneTask(event){
         event.target.parentElement.remove()  //mettre du Fade Out
         var tempString = event.target.parentElement.textContent
-        var doneText = tempString.slice(0, -3) 
+        var doneText = tempString.slice(0, -11) 
         this.state.arrDone.push(doneText);
         this.setState({
             doneText: this.state.doneText,
@@ -29,7 +29,7 @@ class List extends React.Component {
      undoneTask(event){
         event.target.parentElement.remove()  //mettre du Fade Out
         var tempString = event.target.parentElement.textContent
-        var doneText = tempString.slice(0, -3) 
+        var doneText = tempString.slice(0, -12) 
         this.state.arrTask.push(doneText);
         this.setState({
             doneText: this.state.doneText,
@@ -40,16 +40,17 @@ class List extends React.Component {
     render() {
         return(
         <div>
-            <ul> 
-                {(this.state.arrTask).map((taskName, i) => <li key={i}>{taskName}
-                    <button onClick={this.deleteTask}>X</button> <button onClick={this.doneTask}>D</button>
-                </li>)}
-            </ul>
-            <br/>
-            <ul>
-                {(this.state.arrDone).map((taskName, i) => <li key={i}>{taskName}
-                <button onClick={this.deleteTask}>X</button> <button onClick={this.undoneTask}>D</button>
-                </li>)}
+            <h3>To do</h3>
+            <div className='row'> 
+                {(this.state.arrTask).map((taskName, i) => <div key={i} className='toDoText col s12'>{taskName} 
+                    <a  className ="left waves-effect btn-floating grey darken-3 waves-light btn-small z-depth-0" onClick={this.deleteTask}><i className="material-icons">close</i></a>  <a className='doneBtn left btn-floating green btn-small z-depth-0' onClick={this.doneTask}><i className="material-icons">done</i></a>
+                </div>)}
+            </div>
+            <h3>Done</h3>
+            <ul className='row'>
+                {(this.state.arrDone).map((taskName, i) => <div key={i} className='doneText col s12'>{taskName}
+                <a className ="left grey darken-3 btn-floating waves-effect waves-light btn-small z-depth-0" onClick={this.deleteTask}><i className="material-icons">close</i></a> <a className ="left light-blue  darken-2 btn-floating waves-effect waves-light btn-small z-depth-0"  onClick={this.undoneTask}><i class="material-icons">cached</i></a>
+                </div>)}
             </ul>
         </div>
         );
@@ -70,20 +71,29 @@ class App extends React.Component {
 
     enterTask(event){
         if(event.key == 'Enter'){
-            this.setState({
+            if(event.target.value.length!==0){
+                event.target.placeholder=""
+                 this.setState({
                 dynamicTask: event.target.value,
             })
             this.state.arrTask.push(event.target.value)
             console.log(this.state.arrTask)
             event.target.value=''
+            }else{
+                event.target.placeholder='Your task is to do nothing ? :)'
+            }
         }   
         
     } 
 
     render() {
         return(
-            <div>
-                <input onKeyPress={this.enterTask} placeholder='Insert a task' ref={(input) => { this.taskInput = input; }}/>
+            <div className='container flow-text'>
+            <h1>To Do List</h1>
+                <div className='input-field col s8'>
+                   <input id='input_text' type='text' onKeyPress={this.enterTask}/>
+                   <label for="input_text">Input task</label>
+                </div>
                 <List arrTask={this.state.arrTask} arrDone={this.state.arrDone}/> 
             </div>
         );
@@ -92,5 +102,5 @@ class App extends React.Component {
 
 ReactDOM.render(
     <App/>,
-    document.getElementById("root") //TOUT PART DE LA
+    document.getElementById("root") //TOUT PART DE LA   
 );
