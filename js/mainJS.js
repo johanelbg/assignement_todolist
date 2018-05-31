@@ -4,8 +4,9 @@ class List extends React.Component {
         this.deleteTask = this.deleteTask.bind(this)
         this.doneTask = this.doneTask.bind(this)
         this.state={
-            arrDone:[],
-            salope:[] 
+            arrDone:this.props.arrDone,
+            arrTask:this.props.arrTask,
+
         }
     }
 
@@ -15,35 +16,29 @@ class List extends React.Component {
     }
 
     doneTask(event){
-    
         event.target.parentElement.remove()  //mettre du Fade Out
         var tempString = event.target.parentElement.textContent
-        var doneText = tempString.slice(0, -3) // ca permet de suppr le'X D' des boutons dans la string
-        this.setState({
-            salope : this.state.arrDone.push(doneText) 
-        })
-        console.log("arrDone :" + this.state.arrDone) 
+        var doneText = tempString.slice(0, -3) 
+        this.state.arrDone.push(doneText);
 
-        // le but maintenant c'est de choper la nouvelle array dans une autre class faire une map et qu'il soit enfant de APP
-        // jsp si c'est possible !  jvois pas comment faire le lien entre done et list
+        this.setState({
+            doneText: this.state.doneText,
+            arrDone : this.state.arrDone
+        })
     }
 
     render() {
         return(
         <div>
             <ul> 
-                {(this.props.arrTask).map((taskName, i) => <li key={i}>{taskName}
+                {(this.state.arrTask).map((taskName, i) => <li key={i}>{taskName}
                     <button onClick={this.deleteTask}>X</button> <button onClick={this.doneTask}>D</button>
                 </li>)}
             </ul>
-            
-            <br/>
-            <br/>
-            <br/>
-            {this.state.arrDone} ca il comprend pas
-            <br/>
-            <br/>
-            {this.state.salope} ca il comprend mal
+         
+            {(this.state.arrDone).map((taskName, i) => <li key={i}>{taskName}
+                    
+                </li>)}
             <br/>
        
         </div>
@@ -75,7 +70,8 @@ class App extends React.Component {
         this.enterTask = this.enterTask.bind(this)
         this.state = {
             dynamicTask:"",
-            arrTask:[]
+            arrTask:[],
+            arrDone:[]
         };
     }
 
@@ -95,8 +91,8 @@ class App extends React.Component {
         return(
             <div>
                 <input onKeyPress={this.enterTask} placeholder='Insert a task' ref={(input) => { this.taskInput = input; }}/>
-                <List arrTask={this.state.arrTask}> 
-               
+                <List arrTask={this.state.arrTask} arrDone={this.state.arrDone}> 
+                    
                 </List>
 
 
