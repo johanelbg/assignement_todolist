@@ -6,7 +6,6 @@ class List extends React.Component {
         this.state={
             arrDone:this.props.arrDone,
             arrTask:this.props.arrTask,
-
         }
     }
 
@@ -20,7 +19,6 @@ class List extends React.Component {
         var tempString = event.target.parentElement.textContent
         var doneText = tempString.slice(0, -3) 
         this.state.arrDone.push(doneText);
-
         this.setState({
             doneText: this.state.doneText,
             arrDone : this.state.arrDone
@@ -35,34 +33,16 @@ class List extends React.Component {
                     <button onClick={this.deleteTask}>X</button> <button onClick={this.doneTask}>D</button>
                 </li>)}
             </ul>
-         
-            {(this.state.arrDone).map((taskName, i) => <li key={i}>{taskName}
-                    
-                </li>)}
             <br/>
-       
+            <ul>
+                {(this.state.arrDone).map((taskName, i) => <li key={i}>{taskName}
+                </li>)}
+            </ul>
         </div>
         );
     }
 }
 
-
-// class Done extends React.Component {
-//     constructor(props) {
-//         super(props);
-//     }
-
-//     render() {
-//         return(
-//             <ul> 
-//                 {(this.props.arrDone).map((test, i) => 
-//                 <li key={i}>
-//                     {test}
-//                 </li>)}
-//             </ul>
-//         );
-//     }
-// }
 
 class App extends React.Component {
       constructor(props) {
@@ -91,14 +71,7 @@ class App extends React.Component {
         return(
             <div>
                 <input onKeyPress={this.enterTask} placeholder='Insert a task' ref={(input) => { this.taskInput = input; }}/>
-                <List arrTask={this.state.arrTask} arrDone={this.state.arrDone}> 
-                    
-                </List>
-
-
-
-                         
-                {/* Done class ici  */}
+                <List arrTask={this.state.arrTask} arrDone={this.state.arrDone}/> 
             </div>
         );
     }
