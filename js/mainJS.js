@@ -1,10 +1,14 @@
-var frog = new Audio('../sounds/frog.mp3');
-var done = new Audio('../sounds/done.mp3');
-var trash = new Audio('../sounds/trash.mp3');
-var input = new Audio('../sounds/input.mp3');
-var redo = new Audio('../sounds/redo.mp3');
-var error = new Audio('../sounds/error.mp3');
-var easteregg = new Audio('../sounds/easteregg.mp3');
+var Sound = {
+    frog : new Audio('../sounds/frog.mp3'),
+    done : new Audio('../sounds/done.mp3'),
+    trash : new Audio('../sounds/trash.mp3'),
+    input : new Audio('../sounds/input.mp3'),
+    redo : new Audio('../sounds/redo.mp3'),
+    error : new Audio('../sounds/error.mp3'),
+    easteregg : new Audio('../sounds/easteregg.mp3')
+
+}
+
 
 class List extends React.Component {
     constructor(props) {
@@ -23,7 +27,7 @@ class List extends React.Component {
 
     deleteTask(event){
         event.target.parentElement.remove()
-        trash.play();
+        Sound.trash.play();
     }
 
     priorityTask(event){
@@ -33,7 +37,7 @@ class List extends React.Component {
             prioTask:this.state.isPriorityTask
         })
         }else{
-            frog.play();
+            Sound.frog.play();
             var priorityTask = event.target.parentElement.classList.add("priorityTask");
             this.setState({
             prioTask:this.state.priorityTask
@@ -43,7 +47,7 @@ class List extends React.Component {
 
     doneTask(event){
         event.target.parentElement.remove()
-        done.play();
+        Sound.done.play();
         var tempString = event.target.parentElement.textContent
         var doneText = tempString.slice(0, -11) 
         this.state.arrDone.push(doneText);
@@ -55,7 +59,7 @@ class List extends React.Component {
 
      undoneTask(event){
         event.target.parentElement.remove()
-        redo.play();
+        Sound.redo.play();
         var tempString = event.target.parentElement.textContent
         var doneText = tempString.slice(0, -12) 
         this.state.arrTask.push(doneText);
@@ -107,14 +111,14 @@ class App extends React.Component {
 
     enterTask(event){
         if(event.key == 'Enter'){
-            if(event.target.value.length>50){
-                error.play();
+            if((event.target.value.length>50) && event.target.value.indexOf(' ')==-1) {
+                Sound.error.play();
                  this.setState({
                 dynamicSubtitle: "This word is too long for my stomach bro",
                 color: 'errorMessage'
             })
             }else if(event.target.value.length!==0){
-                input.play();
+                Sound.input.play();
                  this.setState({
                 dynamicSubtitle: "Never froget it",
                 color: ''
@@ -124,7 +128,7 @@ class App extends React.Component {
             console.log(this.state.arrTask)
             event.target.value=''
             }else{
-                error.play();
+                Sound.error.play();
                 this.setState({
                 dynamicSubtitle: 'Feed the frog with some words mate',
                 color: 'errorMessage'
@@ -138,15 +142,15 @@ class App extends React.Component {
       easterEgg(event) {
         if(this.state.clickBoolean){
              var addFrogAnim = event.target.classList.add('isFrogClicked')
-            easteregg.play()
+            Sound.easteregg.play()
             this.setState({
                 addFrogAnim: this.state.addFrogAnim,
                  clickBoolean:false
             })
         }else{
              var removeFrogAnim = event.target.classList.remove('isFrogClicked')
-             easteregg.pause();
-             easteregg.currentTime = 0;
+             Sound.easteregg.pause();
+             Sound.easteregg.currentTime = 0;
              this.setState({
                 addFrogAnim: this.state.removeFrogAnim,
                   clickBoolean:true
