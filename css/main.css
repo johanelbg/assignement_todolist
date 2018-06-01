@@ -9,18 +9,22 @@ html{
 
 .subTitle{
     font-size: 28px;
-    
 }
+.errorMessage{
+    color: red;
+}
+
 .frogLetters{
     color:#66bb6a;
 }
 
 .frogIcon{
-    height:20vh;
+    height:29vh;
     width:20vh;
     background-image:url('../images/frog0.png');
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
 }
 
 .input-field{
@@ -52,12 +56,35 @@ i{
 }
 
 
+.toDoText.priorityTask{
+background-color:#ffd54f;
+
+}
+
+.toDoText.priorityTask:hover{
+    background-color:#ffd54f;
+    transform: scale(1.12);
+    box-shadow: 5px 5px 10px black;
+}
+    
 .toDoText, .doneText{
+    animation: fade-in 1s;
+    -webkit-animation: fadein 2s;
     background-color: #c5cae9;
     padding: 1% !important;
     border-radius: 5px;
     margin: 0.1%;
     transition: 0.5s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .toDoText:hover{
@@ -71,7 +98,7 @@ i{
 }
 
 .doneText:hover{
-    background-color: #3f51b5;
+    background-color: #9fa8da;
     opacity: 0.7  ; 
 } 
 
@@ -80,7 +107,6 @@ i{
     margin-left:5%;
     font-family: 'Cabin' Hand, sans-serif;
 }
-
 
 a{
     margin-right:2%;
@@ -94,6 +120,7 @@ a:hover{
 .doneBtn{
     transition: 0.4s;
 }
+
 .doneBtn:hover{
     transform: scale(1.3)
 }
