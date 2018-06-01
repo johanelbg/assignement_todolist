@@ -145,7 +145,8 @@ class App extends React.Component {
             })
         }else{
              var removeFrogAnim = event.target.classList.remove('isFrogClicked')
-             easteregg.pause()
+             easteregg.pause();
+             easteregg.currentTime = 0;
              this.setState({
                 addFrogAnim: this.state.removeFrogAnim,
                   clickBoolean:true
