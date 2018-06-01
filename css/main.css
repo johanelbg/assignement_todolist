@@ -1,3 +1,5 @@
+/*-------------------------------------------------App Class----------------------------------------------- */
+
 html{
     background-color:#7986cb; 
     font-family: 'Cabin', sans-serif;
@@ -11,7 +13,7 @@ html{
     font-size: 28px;
 }
 .errorMessage{
-    color: red;
+    color: rgb(184, 41, 41);
 }
 
 .frogLetters{
@@ -19,12 +21,31 @@ html{
 }
 
 .frogIcon{
-    height:29vh;
-    width:20vh;
+    height:136px;
     background-image:url('../images/frog0.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+}
+
+.frogIcon.isFrogClicked{
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+h1{
+    text-align: center;
 }
 
 .input-field{
@@ -51,14 +72,17 @@ label {
     top: 0.8rem;
 }
 
+
+/*-------------------------------------------------List Class----------------------------------------------- */
+
 i{
     pointer-events: none;
 }
 
 
 .toDoText.priorityTask{
-background-color:#ffd54f;
-
+    background-color:#ffd54f;
+    margin: 0.2%;
 }
 
 .toDoText.priorityTask:hover{
@@ -73,7 +97,7 @@ background-color:#ffd54f;
     background-color: #c5cae9;
     padding: 1% !important;
     border-radius: 5px;
-    margin: 0.1%;
+    margin: 0.2%;
     transition: 0.5s;
 }
 
@@ -123,8 +147,4 @@ a:hover{
 
 .doneBtn:hover{
     transform: scale(1.3)
-}
-
-h1{
-    text-align: center;
 }

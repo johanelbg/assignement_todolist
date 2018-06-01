@@ -1,3 +1,11 @@
+var frog = new Audio('../sounds/frog.mp3');
+var done = new Audio('../sounds/done.mp3');
+var trash = new Audio('../sounds/trash.mp3');
+var input = new Audio('../sounds/input.mp3');
+var redo = new Audio('../sounds/redo.mp3');
+var error = new Audio('../sounds/error.mp3');
+var easteregg = new Audio('../sounds/easteregg.mp3');
+
 class List extends React.Component {
     constructor(props) {
         super(props);
@@ -15,6 +23,7 @@ class List extends React.Component {
 
     deleteTask(event){
         event.target.parentElement.remove()
+        trash.play();
     }
 
     priorityTask(event){
@@ -24,6 +33,7 @@ class List extends React.Component {
             prioTask:this.state.isPriorityTask
         })
         }else{
+            frog.play();
             var priorityTask = event.target.parentElement.classList.add("priorityTask");
             this.setState({
             prioTask:this.state.priorityTask
@@ -33,6 +43,7 @@ class List extends React.Component {
 
     doneTask(event){
         event.target.parentElement.remove()
+        done.play();
         var tempString = event.target.parentElement.textContent
         var doneText = tempString.slice(0, -11) 
         this.state.arrDone.push(doneText);
@@ -44,6 +55,7 @@ class List extends React.Component {
 
      undoneTask(event){
         event.target.parentElement.remove()
+        redo.play();
         var tempString = event.target.parentElement.textContent
         var doneText = tempString.slice(0, -12) 
         this.state.arrTask.push(doneText);
@@ -82,22 +94,27 @@ class List extends React.Component {
 class App extends React.Component {
       constructor(props) {
         super(props);
-        this.enterTask = this.enterTask.bind(this)
+        this.enterTask = this.enterTask.bind(this);
+        this.easterEgg = this.easterEgg.bind(this);
         this.state = {
             dynamicSubtitle:"Never froget it !!!",
             arrTask:[],
-            arrDone:[]
+            addFrogAnim:"",
+            arrDone:[],
+            clickBoolean:true
         };
     }
 
     enterTask(event){
         if(event.key == 'Enter'){
             if(event.target.value.length>50){
+                error.play();
                  this.setState({
                 dynamicSubtitle: "This word is too long for my stomach bro",
                 color: 'errorMessage'
             })
             }else if(event.target.value.length!==0){
+                input.play();
                  this.setState({
                 dynamicSubtitle: "Never froget it",
                 color: ''
@@ -107,20 +124,42 @@ class App extends React.Component {
             console.log(this.state.arrTask)
             event.target.value=''
             }else{
+                error.play();
                 this.setState({
                 dynamicSubtitle: 'Feed the frog with some words mate',
                 color: 'errorMessage'
             })
             }
-        }   
-        
-    } 
+        }
 
+    }
+
+  
+      easterEgg(event) {
+        if(this.state.clickBoolean){
+             var addFrogAnim = event.target.classList.add('isFrogClicked')
+            easteregg.play()
+            this.setState({
+                addFrogAnim: this.state.addFrogAnim,
+                 clickBoolean:false
+            })
+        }else{
+             var removeFrogAnim = event.target.classList.remove('isFrogClicked')
+             easteregg.pause()
+             this.setState({
+                addFrogAnim: this.state.removeFrogAnim,
+                  clickBoolean:true
+            })
+           
+        }
+            
+    }
+   
     render() {
         return(
             <div className='container flow-text'>
                     <div className='row'>
-                    <div className='frogIcon col s12 offset-l2 l2'></div>
+                    <div className={'frogIcon col s12 offset-l2 l2 ' + this.state.addFrogAnim} onClick={this.easterEgg} clickBoolean={this.state.clickBoolean}></div>
                         <h1 className="title col s12 l5"> <span className="frogLetters">FROG</span>OTTEN</h1>
                         <h1 className={"title subTitle col s12 "+ this.state.color}>{this.state.dynamicSubtitle}</h1>
                     </div>                        
