@@ -26,6 +26,11 @@ html{
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+    transition: 0.4s;
+}
+
+.frogIcon:hover{
+    transform: scale(1.2)
 }
 
 .frogIcon.isFrogClicked{
