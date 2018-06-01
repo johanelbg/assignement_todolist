@@ -89,10 +89,12 @@ class App extends React.Component {
     render() {
         return(
             <div className='container flow-text'>
-            <h1 className="title"> <span className="frogLetters">FROG</span>OTTEN</h1>
-            <h1 className="title subTitle">Never froget it !</h1>
-            <div className='frogIcon'></div>
-                <div className='input-field col s8'>
+                    <div className='row'>
+                    <div className='frogIcon col s2'></div>
+                        <h1 className="title col s8"> <span className="frogLetters">FROG</span>OTTEN</h1>
+                        <h1 className="title subTitle col s12">Never froget it !</h1>
+                    </div>                        
+                    <div className='input-field col s8'>
                    <input id='input_text' type='text' onKeyPress={this.enterTask}/>
                    <label for="input_text">Input task</label>
                 </div>

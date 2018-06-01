@@ -1,6 +1,10 @@
 html{
     background-color:#7986cb; 
-    font-family: Chalkduster, fantasy;
+    font-family: 'Cabin', sans-serif;
+}
+
+.container{
+    margin-top: 3%;
 }
 
 .subTitle{
@@ -12,12 +16,9 @@ html{
 }
 
 .frogIcon{
-    position:fixed;
-    top:4%;
-    left:3%;
     height:20vh;
     width:20vh;
-    background-image:url('/Images/frog0.png');
+    background-image:url('../images/frog0.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -77,7 +78,7 @@ i{
 
 .toDoText, .doneText{
     margin-left:5%;
-    font-family: Bradley Hand, cursive;
+    font-family: 'Cabin' Hand, sans-serif;
 }
 
 
